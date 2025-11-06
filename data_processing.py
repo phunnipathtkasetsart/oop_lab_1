@@ -3,11 +3,29 @@ import csv, os
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
-cities = []
-with open(os.path.join(__location__, 'Cities.csv')) as f:
-    rows = csv.DictReader(f)
-    for r in rows:
-        cities.append(dict(r))
+
+class DataLoader():
+    def __init__(self):
+        self.cities = []
+    def load_data(self):
+        with open(os.path.join(__location__, 'Cities.csv')) as f:
+            rows = csv.DictReader(f)
+            for r in rows:
+                self.cities.append(dict(r))
+        return self.cities
+
+
+class Table():
+    def __init__(self,table):
+        self.table = table
+    def show_data(self):
+        return self.table
+
+loader = DataLoader()
+table = Table(loader.load_data())
+cities = table.show_data()
+
+
 
 
 def filter(condition,dict_list):
