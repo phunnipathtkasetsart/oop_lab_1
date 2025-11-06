@@ -20,8 +20,10 @@ def filter(condition,dict_list):
 def aggregation(aggregation_key, aggregation_function, dict_list):
     temps = []
     for i in dict_list:
-        temps.append(i[aggregation_key])
-
+        try:
+            temps.append(float(i[aggregation_key]))
+        except ValueError:
+            temps.append(i[aggregation_key])
     return aggregation_function(temps)
 
 
