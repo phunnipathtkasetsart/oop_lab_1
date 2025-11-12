@@ -37,46 +37,8 @@ class DataLoader():
         return data
 
 
-class Table:
-    def __init__(self,table,dict):
-        self.name = table
-        self.table_name = table
-        self.table = dict
-
-    def filter(self,condition):
-        temps = []
-        for item in self.table:
-            if condition(item):
-                temps.append(item)
-        return Table(self.name,temps)
-    
-    def aggregate(self,aggregation_key, aggregation_function):
-        temp = []
-        for item in self.table:
-            temp.append(item[aggregation_key])
-        try:
-            temp = [float(x) for x in temp]
-        except ValueError:
-            pass
-        return aggregation_function(temp)
-    
-    def join(self, tab_name, key):
-        temp = []
-        for i in self.table:
-            for j in tab_name.table:
-                if i[key] == j[key]:
-                    row = i.copy()
-                    row.update(j)
-                    temp.append(row)
-        return Table(self.name + " ", temp)
-        
-    def __str__(self):
-        return self.table_name + ':' + str(self.table)
-
-
 
 class Table:
-    """Your code here"""
     def __init__(self, name, table):
         self.name = name
         self.table_name = name
